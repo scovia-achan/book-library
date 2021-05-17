@@ -20,6 +20,7 @@ router.get('/:id', (req, res) => {
     Book.findById(req.params.id)
         .then(book=>res.json(book))
         .catch(err=>res.status(404).json({message: "No book found"}))
+
 })
 
 
@@ -33,10 +34,10 @@ router.post('/allbooks', (req, res) => {
         date_of_update: req.body.date_of_update
     });   
     newBook.save()
-    .then((allbooks) => {
+    .then((books) => {
         res.json({
-            allbooks,
-            msg:"posted books" + console.log("request posted")
+            books,
+            msg:"You have posted a new book"
         });
     })
     .catch((err) => {
@@ -44,6 +45,18 @@ router.post('/allbooks', (req, res) => {
     })
 
 });
+
+router.put('/:id', (req, res)=>{
+    Book.findByIdAndUpdate(req.params.id, req.body)
+        .then(book=> res.json({message: "book details updated"}))
+        .catch(err=> res.status(400).json({error: "Unable to update book info"}))
+})
+
+router.delete('/:id', (req, res)=>{
+    Book.findByIdAndDelete(req.params.id)
+        .then(item => res.json("Book deleted successfully"))
+        .catch(err=> res.status(404).json({error: "Book doesn't exist"}))
+})
 
 module.exports = router;
 
