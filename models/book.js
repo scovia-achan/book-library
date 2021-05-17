@@ -5,9 +5,11 @@ const schema = mongoose.Schema;
 
 //creating schema
 const BookSchema = new schema({
-    title: {type: String, unique:true},
+    title: {type: String, unique:true, required:true},
     author: String,
-    ISBN: Number
+    ISBN: Number,
+    published_date: { type: Date, default:Date.now},
+    date_of_update: {type: Date, default:Date.now}
 });
 
 const BookModel = mongoose.model('BookModel', BookSchema);

@@ -1,27 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const bookSchema = require('../models/book.js');
+const Book = require('../models/book.js');
 
 //Routes for the models
 //get route
 router.get('/', function(req, res){
-    bookSchema.find({}, (err, booklist) => {
+    Book.find({}, (err, booklist) => {
         if(err){
             console.log(err);
         }else{
             res.json(booklist);
+           
         }
         
     });
 });
 
+router.get('/:id', (req, res) => {
+    Book.findById(req.params.id)
+        .then(book=>res.json(book))
+        .catch(err=>res.status(404).json({message: "No book found"}))
+})
+
 
 
 router.post('/allbooks', (req, res) => {
-    const newBook = new bookSchema({
+    const newBook = new Book({
         title: req.body.title,
         author: req.body.author,
-        ISBN: req.body.ISBN
+        ISBN: req.body.ISBN,
+        published_date: req.body.published_date,
+        date_of_update: req.body.date_of_update
     });   
     newBook.save()
     .then((allbooks) => {

@@ -1,22 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bookRouter = require('./Routes/index.js');
+const bookRouter = require('./routes/index.js');
+
 
 const server = express();
 const hostname = '127.0.0.1';
-const port = '8080';
+const port = process.env.PORT || 8080;
 
 server.use(express.json());
-server.use(express.urlencoded())
+// server.use(express.urlencoded())
 server.use('/', bookRouter);
 server.use('/static',express.static('public'))
+
+require("dotenv").config();
 
 server.listen(port, function(){
     console.log(`Server is running a t http://${hostname}:${port}/`)
 });
 
 //set up default mongoose coneection
-const mongoDB = 'mongodb://127.0.0.1/my_database';
+const mongoDB = process.env.MONGO_DATABASE;
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true, useCreateIndex:true})
 
 // get the default connection

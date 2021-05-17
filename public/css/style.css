@@ -2,10 +2,23 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+   
+}
+h2{
+    display: block;
+    border-bottom: 2px solid aqua;
+    font-size: 3.2rem;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    color: rgb(119, 12, 129);
     text-align: center;
 }
-h2 span{
-    border-bottom: 2px solid aqua;
+div{
+    width: 100%;
     
 }
-
+img{
+    width: 370px;
+    /* height: auto; */
+}
