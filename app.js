@@ -1,9 +1,12 @@
 const express = require('express');
+const server = express();
 const mongoose = require('mongoose');
 const bookRouter = require('./routes/index.js');
+var cors = require("cors")
+server.use(cors())
 
 
-const server = express();
+
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 8080;
 
@@ -32,6 +35,8 @@ db.on('error', function(){
 db.once('open', function(){
     console.log('database connected');
 });
+
+
 
 
 

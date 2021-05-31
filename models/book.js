@@ -5,14 +5,14 @@ const schema = mongoose.Schema;
 
 //creating schema
 const BookSchema = new schema({
-    title: {type: String, unique:true, required:true},
+    title: {type: String, required:true},
     author: String,
-    ISBN: Number,
+    ISBN: {type:Number, unique:true},
     published_date: { type: Date},
     date_of_update: {type: Date, default:Date.now}
 });
 
-const BookModel = mongoose.model('BookModel', BookSchema);
+const Book = mongoose.model('Book', BookSchema);
 
-module.exports = BookModel;
+module.exports = Book;
 

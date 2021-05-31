@@ -3,7 +3,7 @@ const router = express.Router();
 const Book = require('../models/book.js');
 
 //Routes for the models
-//get route
+//get all books route
 router.get('/', function(req, res){
     Book.find({}, (err, booklist) => {
         if(err){
@@ -16,6 +16,7 @@ router.get('/', function(req, res){
     });
 });
 
+// get a single book
 router.get('/:id', (req, res) => {
     Book.findById(req.params.id)
         .then(book=>res.json(book))
